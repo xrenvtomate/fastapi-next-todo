@@ -10,7 +10,7 @@ def get_todo(db: Session, todo_id: int):
 
 
 def get_todos(db: Session):
-    return db.query(Todo).all()
+    return db.query(Todo).order_by(Todo.id).all()
 
 
 def create_todo(db: Session, todo: schemas.TodoCreate):
@@ -19,6 +19,14 @@ def create_todo(db: Session, todo: schemas.TodoCreate):
     db.commit()
     db.refresh(todo)
     return todo
+
+
+def delete_todo(db: Session, todo_id: int):
+    todo: Todo = get_todo(db, todo_id)
+    if not todo:
+        return
+    db.delete(todo)
+    db.commit()
 
 
 def update_todo(db: Session, todo_id: int, todo_update: schemas.TodoUpdate):

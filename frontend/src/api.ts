@@ -41,3 +41,7 @@ export async function updateTodo(todo: UpdateTodo) {
   return await fetchAPI(`/todos/${todo.id}`, "PATCH", todo)
 }
 
+
+export async function deleteTodo(id: number) {
+  return await fetchAPI(`/todos/${id}`, "DELETE")
+}

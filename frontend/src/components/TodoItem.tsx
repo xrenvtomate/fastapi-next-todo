@@ -19,11 +19,14 @@ import { Button } from "./ui/button"
 export default function TodoItem({
   todo,
   updateTodo,
+  removeTodo,
 }: {
   todo: Todo
   updateTodo: (todo: Todo) => void
+  removeTodo: (todo: Todo) => void
 }) {
   const [checked, setChecked] = useState(todo.completed)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const [edit, setEdit] = useState(false)
 
   const completeTodo = async () => {
@@ -37,6 +40,11 @@ export default function TodoItem({
       console.log(e)
       return
     }
+  }
+  const deleteTodo = async () => {
+    await api.deleteTodo(todo.id)
+    setSidebarOpen(false)
+    removeTodo(todo)
   }
 
   return (
@@ -55,7 +63,7 @@ export default function TodoItem({
         className="self-stretch h-auto bg-zinc-500"
       />
 
-      <Sheet>
+      <Sheet open={sidebarOpen} onOpenChange={(open) => setSidebarOpen(open)}>
         <SheetTrigger className="px-4 py-2 ml-0 flex-1 text-start">
           {todo.title}
         </SheetTrigger>
@@ -71,6 +79,9 @@ export default function TodoItem({
                 <Separator />
                 <SheetDescription>{todo.description}</SheetDescription>
                 <Button onClick={() => setEdit(true)}>Edit</Button>
+                <Button variant={"destructive"} onClick={deleteTodo}>
+                  Delete Todo
+                </Button>
               </>
             )}
           </SheetHeader>

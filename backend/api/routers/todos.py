@@ -23,6 +23,11 @@ def create_todo(
 ):
     return crud.create_todo(db, todo)
 
+@router.delete("/{todo_id}")
+def delete_todo(todo_id: int, db: Session = Depends(get_db)):
+    return crud.delete_todo(db, todo_id)
+    
+
 
 @router.patch("/{todo_id}")
 def update_todo(

@@ -19,6 +19,8 @@ export default function TodoList({
               todo,
               updateTodo: (todo: Todo) =>
                 setTodos(todos.map((el) => (el.id == todo.id ? todo : el))),
+              removeTodo: (todo: Todo) =>
+                setTodos(todos.filter((el) => el.id != todo.id)),
             }}
             key={todo.id}
           />
