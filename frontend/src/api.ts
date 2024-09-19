@@ -2,10 +2,11 @@ import { Todo } from "./types"
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
-
-
-
-async function fetchAPI(url: string, method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE", body?: any) {
+async function fetchAPI(
+  url: string,
+  method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE",
+  body?: any
+) {
   const options: RequestInit = {
     method: method,
     headers: {
@@ -20,15 +21,13 @@ async function fetchAPI(url: string, method: "GET" | "POST" | "PUT" | "PATCH" | 
 }
 
 interface CreateTodo {
-    title: string
-    description: string
+  title: string
+  description: string
 }
 
 export async function addTodo(todo: CreateTodo) {
   return await fetchAPI("/todos", "POST", todo)
 }
-
-
 
 interface UpdateTodo {
   id: number
@@ -40,7 +39,6 @@ interface UpdateTodo {
 export async function updateTodo(todo: UpdateTodo) {
   return await fetchAPI(`/todos/${todo.id}`, "PATCH", todo)
 }
-
 
 export async function deleteTodo(id: number) {
   return await fetchAPI(`/todos/${id}`, "DELETE")
