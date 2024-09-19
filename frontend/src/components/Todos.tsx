@@ -15,21 +15,12 @@ export default function Todos({ initialTodos }: { initialTodos: Todo[] }) {
   const addTodo = async () => {
     if (!newTodo) return
     try {
-      await api.addTodo({
+      const createdTodo = await api.addTodo({
         title: newTodo,
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia beatae, quis nemo ducimus similique facere amet magnam eius voluptatum deserunt repellat, vel, sit nostrum fugiat et eos obcaecati odit accusamus!",
       })
-      setTodos([
-        ...todos,
-        {
-          id: Date.now(),
-          title: newTodo,
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia beatae, quis nemo ducimus similique facere amet magnam eius voluptatum deserunt repellat, vel, sit nostrum fugiat et eos obcaecati odit accusamus!",
-          completed: false,
-        },
-      ])
+      setTodos([...todos, createdTodo])
       setNewTodo("")
     } catch (e) {
       console.log(e)
