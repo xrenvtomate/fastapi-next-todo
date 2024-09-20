@@ -15,6 +15,7 @@ import { Separator } from "./ui/separator"
 import * as api from "@/api"
 import EditTodo from "./EditTodo"
 import { Button } from "./ui/button"
+import { toast } from "sonner"
 
 export default function TodoItem({
   todo,
@@ -44,7 +45,10 @@ export default function TodoItem({
   const deleteTodo = async () => {
     await api.deleteTodo(todo.id)
     setSidebarOpen(false)
-    removeTodo(todo)
+    toast("Todo removed!")
+    setTimeout(() => {
+      removeTodo(todo)
+    }, 300)
   }
 
   return (

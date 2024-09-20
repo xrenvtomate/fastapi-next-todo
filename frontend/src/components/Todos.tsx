@@ -7,6 +7,7 @@ import TodoList from "./TodoList"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import * as api from "@/api"
+import { toast } from "sonner"
 
 export default function Todos({ initialTodos }: { initialTodos: Todo[] }) {
   const [newTodo, setNewTodo] = useState("")
@@ -20,6 +21,7 @@ export default function Todos({ initialTodos }: { initialTodos: Todo[] }) {
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia beatae, quis nemo ducimus similique facere amet magnam eius voluptatum deserunt repellat, vel, sit nostrum fugiat et eos obcaecati odit accusamus!",
       })
+      toast("Todo created!")
       setTodos([...todos, createdTodo])
       setNewTodo("")
     } catch (e) {

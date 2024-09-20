@@ -5,6 +5,7 @@ import { Button } from "./ui/button"
 import { useState } from "react"
 
 import * as api from "@/api"
+import { toast } from "sonner"
 
 export default function EditTodo({
   todo,
@@ -25,6 +26,7 @@ export default function EditTodo({
   const save = async () => {
     updateTodo(newTodo)
     await api.updateTodo(newTodo)
+    toast("Changes saved!")
     toggleEdit()
   }
 
