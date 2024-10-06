@@ -1,5 +1,3 @@
-import { Todo } from "./types"
-
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 async function fetchAPI(
