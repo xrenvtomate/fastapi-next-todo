@@ -33,8 +33,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: db
-    # volumes:
-    #   - db_data:/var/lib/postgresql/data  # Persist database data
+    volumes:
+      - db_data:/var/lib/postgresql/data
 
-# volumes:
-#   db_data:
+volumes:
+  db_data:
